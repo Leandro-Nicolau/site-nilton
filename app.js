@@ -1,5 +1,5 @@
 /* ==========================================================================
-   MESTRE DAS OBRAS & REFORMAS - LÓGICA E INTERATIVIDADE (APP.JS)
+   NILTON GOMES - LÓGICA E INTERATIVIDADE (APP.JS)
    ========================================================================== */
 
 // DADOS CONFIGURÁVEIS DO PROFISSIONAL (Altere facilmente aqui)
@@ -16,7 +16,6 @@ const CONFIG = {
 
 document.addEventListener('DOMContentLoaded', () => {
   initNavbar();
-  initBeforeAfterSlider();
   initCalculator();
   initPortfolioFilters();
   initLightbox();
@@ -28,32 +27,31 @@ document.addEventListener('DOMContentLoaded', () => {
    1. NAVBAR SCROLL & MENU MOBILE
    ========================================== */
 function initNavbar() {
-  const navbar = document.querySelector('.navbar');
-  const mobileToggle = document.querySelector('.mobile-toggle');
+  const navbar = document.querySelector('.header');
+  const mobileToggle = document.querySelector('.mobile-menu-btn');
   const navLinks = document.querySelector('.nav-links');
 
-  window.addEventListener('scroll', () => {
+  const onScroll = () => {
     if (window.scrollY > 40) {
       navbar.classList.add('scrolled');
     } else {
       navbar.classList.remove('scrolled');
     }
-  });
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 
   if (mobileToggle && navLinks) {
     mobileToggle.addEventListener('click', () => {
       navLinks.classList.toggle('active');
-      const icon = mobileToggle.querySelector('i');
-      if (icon) {
-        icon.classList.toggle('fa-bars');
-        icon.classList.toggle('fa-times');
-      }
+      mobileToggle.classList.toggle('open');
     });
 
     // Fechar menu ao clicar num link
     document.querySelectorAll('.nav-link').forEach(link => {
       link.addEventListener('click', () => {
         navLinks.classList.remove('active');
+        mobileToggle.classList.remove('open');
       });
     });
   }
@@ -144,10 +142,10 @@ function initCalculator() {
     const minVal = Math.round(baseVal * 0.9);
     const maxVal = Math.round(baseVal * 1.15);
 
-    const formattedMin = minVal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-    const formattedMax = maxVal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    const formattedMin = minVal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
+    const formattedMax = maxVal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
 
-    priceDisplay.textContent = `${formattedMin} - ${formattedMax}`;
+    priceDisplay.textContent = `${formattedMin} – ${formattedMax}`;
 
     // Atualizar botão para mensagem preenchida no WhatsApp
     if (btnCalcWhatsapp) {
@@ -209,6 +207,7 @@ function initLightbox() {
       const img = item.querySelector('img');
       if (img) {
         modalImg.src = img.src;
+        modalImg.alt = img.alt;
         modal.classList.add('active');
       }
     });
@@ -217,6 +216,10 @@ function initLightbox() {
   if (closeBtn) {
     closeBtn.addEventListener('click', () => modal.classList.remove('active'));
   }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') modal.classList.remove('active');
+  });
 
   modal.addEventListener('click', (e) => {
     if (e.target === modal) {
