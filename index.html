@@ -12,7 +12,7 @@
   <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <link rel="stylesheet" href="styles.css">
@@ -21,7 +21,7 @@
 
   <!-- HEADER / NAV -->
   <header class="header" id="header">
-    <nav class="navbar container">
+    <nav class="navbar container" aria-label="Principal">
       <a href="#inicio" class="logo">
         <i class="fas fa-trowel-bricks"></i>
         <span>Nilton Gomes</span>
@@ -218,7 +218,7 @@
   </section>
 
   <!-- PORTFOLIO SECTION -->
-  <section id="portfolio" class="section" style="background: rgba(15, 23, 42, 0.4);">
+  <section id="portfolio" class="section section--alt">
     <div class="container">
       <div class="section-header">
         <div class="badge"><i class="fas fa-images"></i> Trabalhos Realizados</div>
@@ -343,7 +343,7 @@
   </section>
 
   <!-- FAQ SECTION -->
-  <section id="faq" class="section" style="background: rgba(15, 23, 42, 0.4);">
+  <section id="faq" class="section section--alt">
     <div class="container">
       <div class="section-header">
         <div class="badge"><i class="fas fa-question-circle"></i> Dúvidas Frequentes</div>
@@ -449,6 +449,12 @@
       </div>
     </div>
   </footer>
+
+  <!-- LIGHTBOX -->
+  <div class="modal" id="image-modal" role="dialog" aria-label="Foto ampliada">
+    <button class="modal-close" aria-label="Fechar">&times;</button>
+    <img id="modal-img" src="" alt="">
+  </div>
 
   <script src="app.js"></script>
 </body>
